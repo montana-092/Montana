@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DJ Montana | Official Site</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="hero">
+      <img src="dj_montana.PNG" alt="DJ Montana" class="hero-img">
+      <h1 class="glow-text">DJ Montana</h1>
+      <p class="subtitle">Cyberpunk Beats / Neon Nights</p>
+  </header>
+
+  <section class="about reveal">
+    <h2>About</h2>
+    <p>
+      世界を股にかけるサイバーパンクDJ、DJ Montana。<br>
+      ネオンが輝く夜の都市を舞台に、フューチャーベースとシンセウェーブを融合させた唯一無二のサウンドでフロアを熱狂させる。
+    </p>
+  </section>
+
+  <section class="music reveal">
+    <h2>Latest Releases</h2>
+    <ul>
+      <li>Neon Skyline (2025)</li>
+      <li>Cyber Pulse (2024)</li>
+      <li>Midnight Overdrive (2023)</li>
+    </ul>
+  </section>
+
+  <section class="tour reveal">
+    <h2>Tour Dates</h2>
+    <table>
+      <tr><th>日付</th><th>都市</th><th>会場</th></tr>
+      <tr><td>08.15</td><td>東京</td><td>渋谷WOMB</td></tr>
+      <tr><td>09.02</td><td>大阪</td><td>Club Joule</td></tr>
+      <tr><td>10.10</td><td>ベルリン</td><td>Berghain</td></tr>
+    </table>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 DJ Montana. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function revealSections() {
+      const reveals = document.querySelectorAll('.reveal');
+      const windowHeight = window.innerHeight;
+
+      for (let i = 0; i < reveals.length; i++) {
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        const elementVisible = 100; // 100px見えたら表示
+
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add('visible');
+        } else {
+          // アニメーションを繰り返したい場合は下の行のコメントを外す
+          // reveals[i].classList.remove('visible');
+        }
+      }
+    }
+
+    window.addEventListener('scroll', revealSections);
+    revealSections(); // 初期表示でもチェック
+  </script>
+</body>
+</html>

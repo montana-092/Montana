@@ -1,0 +1,169 @@
+/* Base styling */
+*{box-sizing:border-box;margin:0;padding:0}
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* Neon grid overlay */
+  background-image:
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+h1,h2{letter-spacing:2px}
+
+/* Neon glow effect */
+/* Neon glow effect - Insane Version */
+.glow-text {
+  font-size: 3.5rem; /* 少し大きく */
+  color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #f0f,  /* ピンクの光を追加 */
+    0 0 82px #0ff,
+    0 0 92px #0ff,
+    0 0 102px #0ff,
+    0 0 151px #0ff;
+  margin-top: 1rem;
+  animation: flicker 1.5s infinite alternate; /* チラつきアニメーションを追加 */
+}
+
+/* チラつきアニメーション */
+@keyframes flicker {
+  to {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 8px #fff,
+      0 0 18px #fff,
+      0 0 38px #f0f,
+      0 0 73px #0ff,
+      0 0 80px #0ff,
+      0 0 94px #0ff,
+      0 0 140px #0ff;
+  }
+}
+.subtitle{
+  color:#f0f;
+  margin-top:0.5rem;
+}
+
+/* Hero section */
+.hero{
+  text-align:center;
+  padding:4rem 1rem 2rem;
+  position:relative;
+}
+.hero-img{
+  width:300px;
+  height:auto;
+  border-radius:50%;
+  box-shadow:0 0 15px #0ff,0 0 30px #f0f;
+  animation:pulse 4s ease-in-out infinite;
+}
+
+/* 脈動アニメーション */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 15px #0ff, 0 0 30px #f0f;
+  }
+  50% {
+    box-shadow: 0 0 25px #0ff, 0 0 50px #f0f;
+  }
+  100% {
+    box-shadow: 0 0 15px #0ff, 0 0 30px #f0f;
+  }
+}
+
+/* Sections */
+section{padding:4rem 1.5rem;max-width:900px;margin:0 auto}
+section h2{
+  font-size:2rem;
+  color:#0ff;
+  margin-bottom:1rem;
+  text-shadow:0 0 8px #0ff;
+}
+section p,section li,section td,section th{
+  font-size:1rem;
+}
+
+/* Music list */
+.music ul{list-style:none}
+.music li{margin:0.5rem 0;padding-left:1rem;position:relative}
+.music li:before{content:"";position:absolute;left:0;top:0.4rem;width:6px;height:6px;background:#f0f;border-radius:50%;box-shadow:0 0 6px #f0f}
+
+/* Tour table */
+.tour table{width:100%;border-collapse:collapse}
+.tour th,.tour td{border:1px solid #0ff;padding:0.5rem;text-align:center}
+.tour th{background:rgba(0,255,255,0.1)}
+
+/* Footer */
+footer{padding:2rem 1rem;text-align:center;background:#010101;font-size:0.9rem;color:#666}
+footer p{color:#888}
+
+/* Animated background lines */
+body:before{
+  content:"";
+  position:fixed;
+  top:0;left:0;width:200%;height:200%;
+  background:repeating-linear-gradient(120deg,rgba(255,0,255,0.05)0 2px,transparent 2px 40px),repeating-linear-gradient(60deg,rgba(0,255,255,0.05)0 2px,transparent 2px 40px);
+  transform:translate(-50%,-50%) rotate(0deg);
+  animation:rotateBg 20s linear infinite;
+  pointer-events:none;
+}
+@keyframes rotateBg{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* --- 追加コード ここから --- */
+
+/* スクロールアニメーションの準備 */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* スクロールして表示領域に入ったら適用されるクラス */
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- 追加コード ここまで --- */
+
+/* セクションのネオンフレーム */
+section.reveal.visible { /* アニメーション表示後に枠線を適用 */
+  border: 1px solid #0ff;
+  padding: 2.5rem; /* 内側の余白を少し調整 */
+  margin: 2rem auto; /* セクション間の余白を調整 */
+  position: relative;
+  background: rgba(0, 0, 0, 0.5); /* 半透明の背景を追加 */
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  border-radius: 5px; /* 少しだけ角を丸める */
+}
+
+/* フレームの四隅に装飾を追加 */
+section.reveal.visible::before,
+section.reveal.visible::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: #f0f; /* ピンク色に */
+  border-style: solid;
+}
+
+section.reveal.visible::before {
+  top: -5px;
+  left: -5px;
+  border-width: 2px 0 0 2px;
+}
+
+section.reveal.visible::after {
+  bottom: -5px;
+  right: -5px;
+  border-width: 0 2px 2px 0;
+}

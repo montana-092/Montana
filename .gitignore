@@ -1,0 +1,17 @@
+# Ignore macOS metadata
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+/dist/
+/build/
+
+# Node modules (not used but for safety)
+node_modules/
+
+# Local env files
+.env
