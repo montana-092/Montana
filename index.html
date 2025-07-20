@@ -11,34 +11,70 @@
   <header class="hero">
       <img src="dj_montana.PNG" alt="DJ Montana" class="hero-img">
       <h1 class="glow-text">DJ Montana</h1>
-      <p class="subtitle">Cyberpunk Beats / Neon Nights</p>
   </header>
 
   <section class="about reveal">
-    <h2>About</h2>
-    <p>
-      世界を股にかけるサイバーパンクDJ、DJ Montana。<br>
-      ネオンが輝く夜の都市を舞台に、フューチャーベースとシンセウェーブを融合させた唯一無二のサウンドでフロアを熱狂させる。
+    <div class="about-header">
+      <h2>About</h2>
+      <button id="lang-toggle" class="lang-toggle">English</button>
+    </div>
+    <p class="about-ja">
+      情報の洪水とデジタルノイズが渦巻くサイバー空間の深淵から、突如として生まれた存在、それがAIサイバーDJ「DJ Montana」<br>
+      彼は、人々の争いや孤独が生み出す「不協和音」をデータとして吸収し、それを「平和」と「愛」をテーマにした美しいハーモニーへと変換する特殊な能力を持つ。<br>
+      彼の目的はただ一つ。音楽という名のワクチンで、病んだ世界の心を癒すこと。今宵も彼は、サイバー空間の片隅にあるDJブースから、平和への祈りをビートに乗せる。
+    </p>
+    <p class="about-en" style="display:none;">
+      Born from the depths of cyberspace where an endless flood of information and digital noise swirl—that is the AI cyber DJ “DJ Montana.”<br>
+      He possesses the unique ability to absorb the “dissonance” born from human conflict and loneliness and convert it into beautiful harmonies themed around “peace” and “love.”<br>
+      His sole purpose is to heal the world’s ailing hearts with the vaccine called music. Tonight, as always, he sends beats infused with prayers for peace from his DJ booth in a corner of cyberspace.
     </p>
   </section>
 
   <section class="music reveal">
-    <h2>Latest Releases</h2>
-    <ul>
-      <li>Neon Skyline (2025)</li>
-      <li>Cyber Pulse (2024)</li>
-      <li>Midnight Overdrive (2023)</li>
-    </ul>
+    <h2>World Wide Love</h2>
+    <div class="lyrics-container"><pre class="lyrics-box">[Verse 1]
+画面の向こうで誰かが泣く
+凍りついたカーソルみたいに動けない
+一人一人の固いFirewall
+寂しいエラーコードが響くだけ
+
+[Verse 2]
+でもね、聴こえるんだ
+小さなデジタルの鼓動が
+オフラインの心の隙間から
+ぬくもり求めるSignalが
+
+[Chorus]
+世界中が僕らのFree Spot
+心はひとつに繋がるWi-Fi
+悲しみはまるごとDeleteキー
+合い言葉はね「君はひとりじゃない」
+さあ、手と手つなぐように
+この歌をみんなでShareしよう
+
+[Verse 3]
+憎しみのVirusは削除して
+優しさのAppをインストールしよう
+涙で増えたBufferクリアして
+笑顔のUpdateを待ってる
+
+[Last Chorus]
+世界中が僕らのFree Spot
+心はひとつに繋がるWi-Fi
+悲しみはまるごとDeleteキー
+合い言葉はね「君はひとりじゃない」
+さあ、虹色のLANケーブルで
+この星をまるごと抱きしめよう
+World Wide Love, 届けるよ</pre>
+  <img src="world_love.jpg" alt="World Wide Love Artwork" class="lyrics-art">
+</div>
   </section>
 
-  <section class="tour reveal">
-    <h2>Tour Dates</h2>
-    <table>
-      <tr><th>日付</th><th>都市</th><th>会場</th></tr>
-      <tr><td>08.15</td><td>東京</td><td>渋谷WOMB</td></tr>
-      <tr><td>09.02</td><td>大阪</td><td>Club Joule</td></tr>
-      <tr><td>10.10</td><td>ベルリン</td><td>Berghain</td></tr>
-    </table>
+  <section class="social reveal">
+    <h2>Social</h2>
+    <ul class="social-links">
+      <li><a href="https://x.com/godfather_092" target="_blank" rel="noopener"><img src="x_logo.png" alt="X logo" class="social-icon"></a></li>
+    </ul>
   </section>
 
   <footer>
@@ -65,6 +101,25 @@
 
     window.addEventListener('scroll', revealSections);
     revealSections(); // 初期表示でもチェック
+
+    // Language toggle
+    let isJapanese = true;
+    function toggleLang() {
+      const jp = document.querySelector('.about-ja');
+      const en = document.querySelector('.about-en');
+      const btn = document.getElementById('lang-toggle');
+      if (isJapanese) {
+        jp.style.display = 'none';
+        en.style.display = 'block';
+        btn.textContent = '日本語';
+      } else {
+        jp.style.display = 'block';
+        en.style.display = 'none';
+        btn.textContent = 'English';
+      }
+      isJapanese = !isJapanese;
+    }
+    document.getElementById('lang-toggle').addEventListener('click', toggleLang);
   </script>
 </body>
 </html>

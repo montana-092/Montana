@@ -8,8 +8,8 @@ body {
   overflow-x: hidden;
   /* Neon grid overlay */
   background-image:
-    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    linear-gradient(rgba(0, 255, 255, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.3) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
@@ -84,11 +84,63 @@ section{padding:4rem 1.5rem;max-width:900px;margin:0 auto}
 section h2{
   font-size:2rem;
   color:#0ff;
-  margin-bottom:1rem;
+  margin:0;
   text-shadow:0 0 8px #0ff;
+}
+
+/* About header flex container */
+.about-header{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  margin-bottom:1rem;
 }
 section p,section li,section td,section th{
   font-size:1rem;
+}
+
+.social-links{list-style:none;display:flex;justify-content:center;gap:1rem}
+.social-links li{display:inline-block}
+.social-icon{width:48px;height:48px;aspect-ratio:1/1;object-fit:contain;filter:drop-shadow(0 0 6px #0ff);transition:transform 0.3s}
+.social-icon:hover{transform:scale(1.1)}
+
+/* Lyrics scroll box */
+.lyrics-container{display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap}
+.lyrics-box{
+  max-height:300px;
+  overflow-y:auto;
+  white-space:pre-wrap;
+  background:rgba(0,0,0,0.5);
+  padding:1rem;
+  border:1px solid #0ff;
+  box-shadow:0 0 10px rgba(0,255,255,0.3);
+  border-radius:4px;
+  line-height:1.4;
+  margin-top:0;
+}
+
+.lyrics-art{
+  flex:0 0 300px;
+  max-width:300px;
+  height:auto;
+  border-radius:4px;
+  box-shadow:0 0 10px rgba(0,255,255,0.3);
+}
+
+/* Language toggle button */
+.lang-toggle{
+  background:transparent;
+  border:1px solid #0ff;
+  color:#0ff;
+  padding:0.3rem 0.8rem;
+  font-family:'Orbitron',sans-serif;
+  cursor:pointer;
+  margin-top:0.5rem;
+  transition:background 0.3s, color 0.3s;
+}
+.lang-toggle:hover{
+  background:#0ff;
+  color:#000;
 }
 
 /* Music list */
