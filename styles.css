@@ -392,6 +392,14 @@ section.reveal.visible::after {
     align-items: flex-start; /* 左寄せに */
   }
 
+  /* ローダー文字サイズ調整 */
+  .glitch-text {
+    font-size: 1.1rem;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
+  }
+
   /* 楽曲セクション */
   .track-header {
       flex-wrap: wrap; /* 再生ボタンなどを折り返して表示 */
