@@ -31,7 +31,13 @@
   </section>
 
   <section class="music reveal">
-    <h2>World Wide Love</h2>
+    <div class="track-header">
+      <h2>World Wide Love <span class="track-tag">(First&nbsp;Single)</span></h2>
+      <button id="play-btn" class="play-btn">▶︎</button>
+      <span id="time-display" class="time-display">0:00 / 0:00</span>
+
+      <audio id="world-audio" src="world_wide_love.mp3"></audio>
+    </div>
     <div class="lyrics-container"><pre class="lyrics-box">[Verse 1]
 画面の向こうで誰かが泣く
 凍りついたカーソルみたいに動けない
@@ -120,6 +126,26 @@ World Wide Love, 届けるよ</pre>
       isJapanese = !isJapanese;
     }
     document.getElementById('lang-toggle').addEventListener('click', toggleLang);
+
+    // Audio play/pause
+    const audio = document.getElementById('world-audio');
+    const playBtn = document.getElementById('play-btn');
+    const timeSpan = document.getElementById('time-display');
+
+    function formatTime(sec){if(isNaN(sec))return '0:00';const m=Math.floor(sec/60);const s=Math.floor(sec%60);return `${m}:${s.toString().padStart(2,'0')}`}
+      function updateTime(){timeSpan.textContent=`${formatTime(audio.currentTime)} / ${formatTime(audio.duration||0)}`;} 
+      playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = '⏸';
+      } else {
+        audio.pause();
+        playBtn.textContent = '▶︎';
+      }
+    });
+    audio.addEventListener('loadedmetadata', updateTime);
+
+    audio.addEventListener('timeupdate', updateTime);
   </script>
 </body>
 </html>

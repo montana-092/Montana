@@ -15,3 +15,6 @@ node_modules/
 
 # Local env files
 .env
+
+# Ignore large audio file
+world_wide_love.wav
