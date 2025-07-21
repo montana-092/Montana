@@ -89,6 +89,11 @@ section h2{
 }
 
 /* About header flex container */
+.track-header{display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem;margin-bottom:0.5rem}
+.play-btn{background:#0ff;border:none;color:#000;font-size:1.2rem;padding:0.3rem 0.6rem;border-radius:4px;cursor:pointer;box-shadow:0 0 8px #0ff;transition:opacity 0.3s}
+.play-btn:hover{opacity:0.8}
+
+
 .about-header{
   display:flex;
   align-items:center;
@@ -101,30 +106,40 @@ section p,section li,section td,section th{
 
 .social-links{list-style:none;display:flex;justify-content:center;gap:1rem}
 .social-links li{display:inline-block}
-.social-icon{width:48px;height:48px;aspect-ratio:1/1;object-fit:contain;filter:drop-shadow(0 0 6px #0ff);transition:transform 0.3s}
+.social-icon{width:64px;height:64px;aspect-ratio:1/1;object-fit:contain;filter:drop-shadow(0 0 6px #0ff);transition:transform 0.3s}
 .social-icon:hover{transform:scale(1.1)}
 
 /* Lyrics scroll box */
-.lyrics-container{display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap}
+.lyrics-container{display:flex;gap:1rem;align-items:flex-start;flex-wrap:nowrap}
 .lyrics-box{
+  flex:1 1 50%;
   max-height:300px;
   overflow-y:auto;
   white-space:pre-wrap;
   background:rgba(0,0,0,0.5);
   padding:1rem;
   border:1px solid #0ff;
+  line-height:1.4;
+  font-size:1.1rem;
   box-shadow:0 0 10px rgba(0,255,255,0.3);
   border-radius:4px;
-  line-height:1.4;
   margin-top:0;
 }
 
 .lyrics-art{
   flex:0 0 300px;
+  flex:1 1 0;
   max-width:300px;
   height:auto;
   border-radius:4px;
   box-shadow:0 0 10px rgba(0,255,255,0.3);
+}
+
+/* 透過させたくない画像を強制不透明に */
+.hero-img,
+.lyrics-art,
+img.no-fade {
+  opacity: 1 !important;
 }
 
 /* Language toggle button */
@@ -159,6 +174,7 @@ footer p{color:#888}
 
 /* Animated background lines */
 body:before{
+  z-index: -1;
   content:"";
   position:fixed;
   top:0;left:0;width:200%;height:200%;
@@ -168,6 +184,20 @@ body:before{
   pointer-events:none;
 }
 @keyframes rotateBg{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* Cyberpunk city background image */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('cyber_city_bg.jpg') center/cover no-repeat;
+  opacity: 0.4; /* 濃く表示に戻す */
+  pointer-events: none;
+  z-index: -2; /* body:before(-1)よりさらに背面 */
+}
 
 /* --- 追加コード ここから --- */
 
@@ -219,3 +249,181 @@ section.reveal.visible::after {
   right: -5px;
   border-width: 0 2px 2px 0;
 }
+
+/* --- ローディング画面のスタイル --- */
+#loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 1s ease-out, visibility 1s ease-out;
+  opacity: 1;
+  visibility: visible;
+}
+
+.loader-text {
+  color: #0ff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  text-shadow: 0 0 8px #0ff;
+  margin-bottom: 1.5rem;
+}
+
+.progress-bar-container {
+  width: 80%;
+  max-width: 400px;
+  height: 10px;
+  border: 1px solid #0ff;
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background-color: #0ff;
+  box-shadow: 0 0 10px #0ff, 0 0 15px #0ff;
+  animation: load 2.5s ease-out forwards;
+}
+
+@keyframes load {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.glitch-text {
+  font-size: 1.5rem;
+  color: #f0f;
+  text-shadow: 0 0 8px #f0f;
+  animation: flicker 1.5s infinite alternate;
+}
+
+/* ローダーを非表示にするクラス */
+#loader-wrapper.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* シークバー */
+.seek-bar{
+  -webkit-appearance:none;
+  appearance:none;
+  width:100%;
+  max-width:400px;
+  height:6px;
+  background:rgba(0,255,255,0.2);
+  border:none;
+  border-radius:3px;
+  box-shadow:0 0 8px rgba(0,255,255,0.4);
+  cursor:pointer;
+}
+.seek-bar::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#f0f;
+  box-shadow:0 0 8px #f0f,0 0 12px #0ff;
+  border:2px solid #0ff;
+  cursor:pointer;
+  transition:transform 0.2s;
+}
+.seek-bar::-webkit-slider-thumb:hover{transform:scale(1.2);}
+.seek-bar::-moz-range-thumb{
+  width:16px;height:16px;border-radius:50%;background:#f0f;border:2px solid #0ff;box-shadow:0 0 8px #f0f,0 0 12px #0ff;cursor:pointer;}
+
+/* タイトルと秒数を改行させない */
+.track-header h2,
+.time-display{
+  white-space: nowrap;
+}
+
+.player-controls{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  margin-top:0.5rem;
+}
+
+/* --- スマートフォン向けレスポンシブ対応 ここから --- */
+
+@media (max-width: 768px) {
+
+  /* 全体的な調整 */
+  body {
+    background-size: 80px 80px; /* 背景グリッドを調整 */
+  }
+
+  section {
+    padding: 2.5rem 1rem; /* 左右の余白を縮小 */
+  }
+
+  /* ヒーローセクション */
+  .hero {
+    padding: 3rem 1rem 1.5rem; /* 上下の余白を調整 */
+  }
+  
+  .hero-img {
+    width: 200px; /* 画像を少し小さく */
+  }
+
+  .glow-text {
+    font-size: 2.5rem; /* メインタイトルをスマホ向けサイズに */
+    letter-spacing: 1.5px;
+  }
+  
+  .subtitle {
+    font-size: 1rem; /* サブタイトルも調整 */
+  }
+
+  /* Aboutセクション */
+  .about-header {
+    flex-direction: column; /* 「About」見出しとボタンを縦並びに */
+    align-items: flex-start; /* 左寄せに */
+  }
+
+  /* 楽曲セクション */
+  .track-header {
+      flex-wrap: wrap; /* 再生ボタンなどを折り返して表示 */
+      gap: 0.5rem;
+  }
+
+  .track-header h2 {
+      width: 100%; /* トラックタイトルは1行を専有 */
+      margin-bottom: 0.5rem;
+  }
+
+  .lyrics-container {
+    flex-direction: column; /* 歌詞とアートワークを縦並びに変更 */
+    align-items: center;   /* 中央揃えに */
+    gap: 1.5rem;
+  }
+
+  .lyrics-box,
+  .lyrics-art {
+    flex: none; /* flexの自動調整をリセット */
+    width: 100%; /* 幅を画面いっぱいに */
+    max-width: 100%;
+  }
+
+  .lyrics-art {
+    order: -1; /* アートワークを歌詞の上に配置 */
+  }
+
+  /* セクションのフレーム装飾 */
+  section.reveal.visible {
+    padding: 1.5rem; /* 内側の余白を調整 */
+  }
+}
+
+/* --- スマートフォン向けレスポンシブ対応 ここまで --- */

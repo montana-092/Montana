@@ -8,8 +8,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div id="loader-wrapper">
+    <div class="loader-text">Initializing Connection...</div>
+    <div class="progress-bar-container">
+        <div class="progress-bar"></div>
+    </div>
+    <div class="glitch-text">LOADING DJ MONTANA SYSTEMS...</div>
+  </div>
   <header class="hero">
-      <img src="dj_montana.PNG" alt="DJ Montana" class="hero-img">
+      <img src="dj_montana.jpg" alt="DJ Montana" class="hero-img">
       <h1 class="glow-text">DJ Montana</h1>
   </header>
 
@@ -32,13 +39,15 @@
 
   <section class="music reveal">
     <div class="track-header">
-      <h2>World Wide Love <span class="track-tag">(First&nbsp;Single)</span></h2>
-      <button id="play-btn" class="play-btn">▶︎</button>
-      <span id="time-display" class="time-display">0:00 / 0:00</span>
-
-      <audio id="world-audio" src="world_wide_love.mp3"></audio>
+      <h2>World Wide Love <span class="track-tag">(First&nbsp;Single)</span> <button id="lyrics-toggle" class="lang-toggle">English</button></h2>
+      <div class="player-controls">
+        <button id="play-btn" class="play-btn">▶︎</button>
+        <span id="time-display" class="time-display">0:00 / 0:00</span>
+        <input type="range" id="seek-bar" class="seek-bar" min="0" max="100" value="0">
+      </div>
+      <audio id="world-audio" src="assets/world_wide_love.mp3"></audio>
     </div>
-    <div class="lyrics-container"><pre class="lyrics-box">[Verse 1]
+    <div class="lyrics-container"><pre class="lyrics-box lyrics-ja">[Verse 1]
 画面の向こうで誰かが泣く
 凍りついたカーソルみたいに動けない
 一人一人の固いFirewall
@@ -72,6 +81,40 @@
 さあ、虹色のLANケーブルで
 この星をまるごと抱きしめよう
 World Wide Love, 届けるよ</pre>
+<pre class="lyrics-box lyrics-en" style="display:none;">[Verse 1]
+Someone’s crying on the far-side screen,
+Frozen like a cursor, stuck between.
+Each of us hides behind a firewall so strong,
+Where only lonely error codes go echoing on.
+
+[Verse 2]
+But listen—there it is: a tiny digital heartbeat,
+Pulsing through the offline cracks of every street.
+A signal searching for a little warmth inside,
+A quiet SOS the crowd can’t hide.
+
+[Chorus]
+The whole wide world is our free spot,
+Our hearts all linked on the same Wi-Fi dot.
+We’ll press Delete on every grief we see—
+The password’s simple: “You’re not lonely.”
+So hand in hand across the air,
+Let’s hit Share—sing this song everywhere.
+
+[Verse 3]
+Erase the virus born of hate,
+Install the kindness app—don’t wait.
+Clear the buffer brimming with tears,
+Smiles are the update we’ve waited for years.
+
+[Last Chorus]
+The whole wide world is our free spot,
+Our hearts all linked on the same Wi-Fi dot.
+We’ll press Delete on every grief we see—
+The password’s simple: “You’re not lonely.”
+With a rainbow-striped LAN in a gentle embrace,
+Let’s wrap this planet in loving grace.
+World Wide Love—sending it your way.</pre>
   <img src="world_love.jpg" alt="World Wide Love Artwork" class="lyrics-art">
 </div>
   </section>
@@ -131,9 +174,13 @@ World Wide Love, 届けるよ</pre>
     const audio = document.getElementById('world-audio');
     const playBtn = document.getElementById('play-btn');
     const timeSpan = document.getElementById('time-display');
+    const seekBar = document.getElementById('seek-bar');
 
     function formatTime(sec){if(isNaN(sec))return '0:00';const m=Math.floor(sec/60);const s=Math.floor(sec%60);return `${m}:${s.toString().padStart(2,'0')}`}
-      function updateTime(){timeSpan.textContent=`${formatTime(audio.currentTime)} / ${formatTime(audio.duration||0)}`;} 
+      function updateTime(){
+        timeSpan.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration||0)}`;
+        seekBar.value = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      } 
       playBtn.addEventListener('click', () => {
       if (audio.paused) {
         audio.play();
@@ -144,8 +191,55 @@ World Wide Love, 届けるよ</pre>
       }
     });
     audio.addEventListener('loadedmetadata', updateTime);
+    seekBar.addEventListener('input', () => {
+      if (audio.duration) {
+        const seekTime = seekBar.value * audio.duration / 100;
+        audio.currentTime = seekTime;
+        updateTime();
+      }
+    });
 
     audio.addEventListener('timeupdate', updateTime);
+
+    // Lyrics language toggle
+    let isLyricsJapanese = true;
+    const jpSong = 'assets/world_wide_love.mp3';
+    const enSong = 'assets/World_Wide_Love_English.mp3';
+    function toggleLyricsLang() {
+      const jpLyric = document.querySelector('.lyrics-ja');
+      const enLyric = document.querySelector('.lyrics-en');
+      const btn = document.getElementById('lyrics-toggle');
+      if (isLyricsJapanese) {
+        jpLyric.style.display = 'none';
+        enLyric.style.display = 'block';
+        btn.textContent = '日本語';
+        audio.pause();
+        audio.src = enSong;
+        audio.load();
+        playBtn.textContent = '▶︎';
+        updateTime();
+      } else {
+        jpLyric.style.display = 'block';
+        enLyric.style.display = 'none';
+        btn.textContent = 'English';
+        audio.pause();
+        audio.src = jpSong;
+        audio.load();
+        playBtn.textContent = '▶︎';
+        updateTime();
+      }
+      isLyricsJapanese = !isLyricsJapanese;
+    }
+    document.getElementById('lyrics-toggle').addEventListener('click', toggleLyricsLang);
+  // --- ローダースクリプト ---
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('loader-wrapper');
+    // 3秒後にローダーを非表示にする
+    setTimeout(() => {
+      loader.classList.add('hidden');
+    }, 3000);
+  });
+
   </script>
 </body>
 </html>
