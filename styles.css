@@ -401,6 +401,9 @@ section.reveal.visible::after {
   .track-header h2 {
       width: 100%; /* トラックタイトルは1行を専有 */
       margin-bottom: 0.5rem;
+      font-size: 1.4rem; /* モバイルで少し小さく */
+      white-space: normal; /* 折り返しを許可 */
+      word-break: break-word; /* 長い単語も折り返す */
   }
 
   .lyrics-container {
