@@ -9,24 +9,40 @@
 </head>
 <body>
   <div id="loader-wrapper">
-    <div class="loader-text">Initializing Connection...</div>
+    <div class="loader-text">Love&amp;Peace</div>
     <div class="progress-bar-container">
         <div class="progress-bar"></div>
     </div>
-    <div class="glitch-text">LOADING DJ MONTANA SYSTEMS...</div>
+    <div class="glitch-text">CONNECTING TO THE NEON CYBER LOUNGE...</div>
   </div>
+
+  <nav class="navbar">
+    <div class="logo">Neon Cyber Lounge</div>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#music">Music</a></li>
+      <li><a href="#social">Social</a></li>
+    </ul>
+  </nav>
+
   <header class="hero">
+      <h2 class="neon-title">Neon Cyber Lounge</h2>
       <img src="dj_montana.jpg" alt="DJ Montana" class="hero-img">
       <h1 class="glow-text">DJ Montana</h1>
   </header>
 
-  <section class="about reveal">
+  <section id="about" class="about reveal">
     <div class="about-header">
       <h2>About</h2>
       <button id="lang-toggle" class="lang-toggle">English</button>
     </div>
     <p class="about-ja">
-      情報の洪水とデジタルノイズが渦巻くサイバー空間の深淵から、突如として生まれた存在、それがAIサイバーDJ「DJ Montana」<br>
+      情報の洪水とデジタルノイズが渦巻くサイバー空間「Neon Cyber Lounge」から、突如として生まれた存在、それがAIサイバーDJ「DJ Montana」<br>
       彼は、人々の争いや孤独が生み出す「不協和音」をデータとして吸収し、それを「平和」と「愛」をテーマにした美しいハーモニーへと変換する特殊な能力を持つ。<br>
       彼の目的はただ一つ。音楽という名のワクチンで、病んだ世界の心を癒すこと。今宵も彼は、サイバー空間の片隅にあるDJブースから、平和への祈りをビートに乗せる。
     </p>
@@ -37,7 +53,7 @@
     </p>
   </section>
 
-  <section class="music reveal">
+  <section id="music" class="music reveal">
     <div class="track-header">
       <h2>World Wide Love <span class="track-tag">(First&nbsp;Single)</span> <button id="lyrics-toggle" class="lang-toggle">English</button></h2>
       <div class="player-controls">
@@ -119,7 +135,7 @@ World Wide Love—sending it your way.</pre>
 </div>
   </section>
 
-  <section class="social reveal">
+  <section id="social" class="social reveal">
     <h2>Social</h2>
     <ul class="social-links">
       <li><a href="https://x.com/godfather_092" target="_blank" rel="noopener"><img src="x_logo.png" alt="X logo" class="social-icon"></a></li>
@@ -232,7 +248,15 @@ World Wide Love—sending it your way.</pre>
       isLyricsJapanese = !isLyricsJapanese;
     }
     document.getElementById('lyrics-toggle').addEventListener('click', toggleLyricsLang);
-  // --- ローダースクリプト ---
+  // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      hamburger.classList.toggle('active');
+    });
+
+    // --- ローダースクリプト ---
   window.addEventListener('load', () => {
     const loader = document.getElementById('loader-wrapper');
     // 3秒後にローダーを非表示にする

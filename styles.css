@@ -15,6 +15,15 @@ body {
 
 h1,h2{letter-spacing:2px}
 
+/* Neon title style */
+.neon-title {
+  font-size: 3.2rem;
+  color: #0ff;
+  text-shadow: 0 0 6px #0ff, 0 0 12px #f0f;
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
+}
+
 /* Neon glow effect */
 /* Neon glow effect - Insane Version */
 .glow-text {
@@ -353,6 +362,83 @@ section.reveal.visible::after {
   align-items:center;
   gap:0.5rem;
   margin-top:0.5rem;
+}
+
+/* Navbar */
+.navbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0.8rem 1rem;
+  background:rgba(0,0,0,0.7);
+  z-index:1000;
+  backdrop-filter: blur(4px);
+}
+.navbar .logo{
+  color:#0ff;
+  font-size:1.1rem;
+  text-shadow:0 0 6px #0ff;
+}
+.nav-links{
+  list-style:none;
+  display:flex;
+  gap:1.5rem;
+}
+.nav-links a{
+  color:#0ff;
+  text-decoration:none;
+  text-shadow:0 0 6px #0ff;
+}
+.hamburger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+}
+.hamburger span{
+  display:block;
+  width:25px;
+  height:3px;
+  background:#0ff;
+  box-shadow:0 0 6px #0ff;
+  transition:transform 0.3s, opacity 0.3s;
+}
+.hamburger.active span:nth-child(1){
+  transform:translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2){
+  opacity:0;
+}
+.hamburger.active span:nth-child(3){
+  transform:translateY(-8px) rotate(-45deg);
+}
+
+@media (max-width: 768px){
+  .hamburger{
+    display:flex;
+  }
+  .nav-links{
+    position:fixed;
+    top:60px;
+    right:-220px;
+    flex-direction:column;
+    background:rgba(0,0,0,0.9);
+    width:200px;
+    height:100%;
+    padding:2rem 1.5rem;
+    transition:right 0.3s ease-in-out;
+    gap:1rem;
+  }
+  .nav-links.show{
+    right:0;
+  }
+  .nav-links li{
+    margin-bottom:1rem;
+  }
 }
 
 /* --- スマートフォン向けレスポンシブ対応 ここから --- */
