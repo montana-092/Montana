@@ -118,6 +118,12 @@ section p,section li,section td,section th{
 .social-icon{width:64px;height:64px;aspect-ratio:1/1;object-fit:cover;filter:drop-shadow(0 0 6px #0ff);transition:transform 0.3s}
 .social-icon:hover{transform:scale(1.1)}
 
+/* Prompt Generator link */
+.text-link{
+  font-size:1.3rem;
+  font-weight:700;
+}
+
 /* Lyrics scroll box */
 .lyrics-container{display:flex;gap:1rem;align-items:flex-start;flex-wrap:nowrap}
 .lyrics-box{
