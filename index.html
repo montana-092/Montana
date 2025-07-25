@@ -18,8 +18,10 @@
   <meta name="twitter:description" content="Neon Cyber Lounge - Official site of AI Cyber DJ Montana">
   <meta name="twitter:image" content="assets/ogp.jpg">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div id="particles-js"></div>
   <div id="loader-wrapper">
     <div class="loader-text">Love&amp;Peace</div>
     <div class="progress-bar-container">
@@ -73,6 +75,7 @@
         <button id="play-btn" class="play-btn">▶︎</button>
         <span id="time-display" class="time-display">0:00 / 0:00</span>
         <input type="range" id="seek-bar" class="seek-bar" min="0" max="100" value="0">
+        <input type="range" id="volume-bar" class="volume-bar" min="0" max="1" step="0.01" value="1">
       </div>
       <audio id="world-audio" src="assets/world_wide_love.mp3"></audio>
     </div>
@@ -148,9 +151,28 @@ World Wide Love—sending it your way.</pre>
 </div>
   </section>
 
-  <section id="prompt" class="prompt reveal">
-  <h2>Prompt Generator</h2>
-  <p style="text-align:center"><a href="https://montana-092.github.io/prompt-generator/" target="_blank" rel="noopener" class="text-link">Prompt Generator</a></p>
+  <section id="inspiration" class="inspiration reveal">
+  <h2>Inspiration Core</h2>
+  <p class="prompt-catchphrase">DJ Montanaの創造性の源泉へようこそ。ここで生まれる無数のアイデアが、新たな音楽の源となる。<br>あなたもその一部を体験し、自分だけのインスピレーションを解放しよう。</p>
+  
+  <div class="prompt-showcase">
+    <div class="prompt-example">
+      <h4>// TYPE: LYRICS</h4>
+      <p class="typing-animation">A love song for a disconnected world, cyber-themed, wifi, LAN cable, error codes, finding warmth</p>
+    </div>
+    <div class="prompt-example">
+      <h4>// TYPE: ARTWORK</h4>
+      <p class="typing-animation-2">DJ in a neon city, wearing headphones, surrounded by holographic sound waves, cyberpunk aesthetic</p>
+    </div>
+    <div class="prompt-example">
+      <h4>// TYPE: MELODY</h4>
+      <p class="typing-animation-3">Uplifting trance, energetic beat, nostalgic but hopeful synth melody, 140BPM</p>
+    </div>
+  </div>
+
+  <a href="https://montana-092.github.io/prompt-generator/" target="_blank" rel="noopener" class="cta-button">
+    Prompt Generatorを起動
+  </a>
 </section>
 
   <section id="social" class="social reveal">
@@ -211,6 +233,8 @@ World Wide Love—sending it your way.</pre>
     const playBtn = document.getElementById('play-btn');
     const timeSpan = document.getElementById('time-display');
     const seekBar = document.getElementById('seek-bar');
+    const volumeBar = document.getElementById('volume-bar');
+    const heroImg = document.querySelector('.hero-img');
 
     function formatTime(sec){if(isNaN(sec))return '0:00';const m=Math.floor(sec/60);const s=Math.floor(sec%60);return `${m}:${s.toString().padStart(2,'0')}`}
       function updateTime(){
@@ -220,9 +244,11 @@ World Wide Love—sending it your way.</pre>
       playBtn.addEventListener('click', () => {
       if (audio.paused) {
         audio.play();
+        heroImg.style.animationPlayState = 'running';
         playBtn.textContent = '⏸';
       } else {
         audio.pause();
+        heroImg.style.animationPlayState = 'paused';
         playBtn.textContent = '▶︎';
       }
     });
@@ -236,6 +262,9 @@ World Wide Love—sending it your way.</pre>
     });
 
     audio.addEventListener('timeupdate', updateTime);
+    volumeBar.addEventListener('input', () => {
+      audio.volume = volumeBar.value;
+    });
 
     // Lyrics language toggle
     let isLyricsJapanese = true;
@@ -250,6 +279,7 @@ World Wide Love—sending it your way.</pre>
         enLyric.style.display = 'block';
         btn.textContent = '日本語';
         audio.pause();
+        heroImg.style.animationPlayState = 'paused';
         audio.src = enSong;
         audio.load();
         playBtn.textContent = '▶︎';
@@ -259,6 +289,7 @@ World Wide Love—sending it your way.</pre>
         enLyric.style.display = 'none';
         btn.textContent = 'English';
         audio.pause();
+        heroImg.style.animationPlayState = 'paused';
         audio.src = jpSong;
         audio.load();
         playBtn.textContent = '▶︎';
@@ -278,11 +309,14 @@ World Wide Love—sending it your way.</pre>
     // --- ローダースクリプト ---
   window.addEventListener('load', () => {
     const loader = document.getElementById('loader-wrapper');
+    heroImg.style.animationPlayState = 'paused';
     // 3秒後にローダーを非表示にする
     setTimeout(() => {
       loader.classList.add('hidden');
     }, 3000);
   });
 </script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="particles-config.js"></script>
 </body>
 </html>

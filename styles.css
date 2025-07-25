@@ -1,3 +1,13 @@
+/* Particle background */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1; /* コンテンツの背面に配置 */
+}
+
 /* Base styling */
 *{box-sizing:border-box;margin:0;padding:0}
 body {
@@ -91,6 +101,7 @@ h1,h2{letter-spacing:2px}
 /* Sections */
 section{padding:4rem 1.5rem;max-width:900px;margin:0 auto}
 section h2{
+  letter-spacing:3px;
   font-size:2rem;
   color:#0ff;
   margin:0;
@@ -109,6 +120,12 @@ section h2{
   gap:0.5rem;
   margin-bottom:1rem;
 }
+.about-ja, .about-en {
+  font-family: 'Noto Sans JP', sans-serif; /* 長文用フォント */
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
 section p,section li,section td,section th{
   font-size:1rem;
 }
@@ -189,7 +206,7 @@ footer p{color:#888}
 
 /* Animated background lines */
 body:before{
-  z-index: -1;
+  z-index: -2;
   content:"";
   position:fixed;
   top:0;left:0;width:200%;height:200%;
@@ -211,7 +228,7 @@ body::after {
   background: url('cyber_city_bg.jpg') center/cover no-repeat;
   opacity: 0.4; /* 濃く表示に戻す */
   pointer-events: none;
-  z-index: -2; /* body:before(-1)よりさらに背面 */
+  z-index: -3; /* body:before(-2)よりさらに背面 */
 }
 
 /* --- 追加コード ここから --- */
@@ -356,6 +373,34 @@ section.reveal.visible::after {
 .seek-bar::-webkit-slider-thumb:hover{transform:scale(1.2);}
 .seek-bar::-moz-range-thumb{
   width:16px;height:16px;border-radius:50%;background:#f0f;border:2px solid #0ff;box-shadow:0 0 8px #f0f,0 0 12px #0ff;cursor:pointer;}
+
+/* ボリュームスライダー */
+.volume-bar{
+  -webkit-appearance:none;
+  appearance:none;
+  width:100px;
+  height:6px;
+  background:rgba(255,0,255,0.2);
+  border:none;
+  border-radius:3px;
+  box-shadow:0 0 8px rgba(255,0,255,0.4);
+  cursor:pointer;
+}
+.volume-bar::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#0ff;
+  border:2px solid #f0f;
+  box-shadow:0 0 8px #0ff,0 0 12px #f0f;
+  cursor:pointer;
+  transition:transform 0.2s;
+}
+.volume-bar::-webkit-slider-thumb:hover{transform:scale(1.2);}
+.volume-bar::-moz-range-thumb{
+  width:14px;height:14px;border-radius:50%;background:#0ff;border:2px solid #f0f;box-shadow:0 0 8px #0ff,0 0 12px #f0f;cursor:pointer;}
 
 /* タイトルと秒数を改行させない */
 .track-header h2,
@@ -530,3 +575,97 @@ section.reveal.visible::after {
 }
 
 /* --- スマートフォン向けレスポンシブ対応 ここまで --- */
+
+/* --- Prompt Generator セクションのスタイル --- */
+.prompt-catchphrase {
+  text-align: center;
+  color: #ccc;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 1rem;
+  max-width: 650px;
+  margin: 1rem auto 2.5rem;
+  line-height: 1.8;
+}
+
+.prompt-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.prompt-example {
+  background: rgba(0, 0, 0, 0.4);
+  border-left: 3px solid #f0f;
+  padding: 1rem 1.5rem;
+  font-family: 'Courier New', Courier, monospace;
+  border-radius: 4px;
+}
+
+.prompt-example h4 {
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+}
+
+.prompt-example p {
+  color: #0ff;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.cta-button {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0.8rem 2rem;
+  border: 1px solid #0ff;
+  color: #0ff;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #0ff;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #0ff; }
+}
+
+.reveal.visible .typing-animation {
+  width: 100%;
+  animation: typing 3s steps(80, end), blink-caret .75s step-end infinite;
+  animation-fill-mode: forwards;
+  border-right: .15em solid #0ff;
+}
+
+.reveal.visible .typing-animation-2 {
+  width: 100%;
+  animation: typing 3s steps(80, end), blink-caret .75s step-end infinite;
+  animation-fill-mode: forwards;
+  animation-delay: 0.5s;
+  border-right: .15em solid #0ff;
+}
+
+.reveal.visible .typing-animation-3 {
+  width: 100%;
+  animation: typing 3s steps(80, end), blink-caret .75s step-end infinite;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+  border-right: .15em solid #0ff;
+}
