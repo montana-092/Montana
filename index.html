@@ -40,7 +40,7 @@
     <ul class="nav-links" id="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#music">Music</a></li>
-      <li><a href="https://montana-092.github.io/prompt-generator/" target="_blank" rel="noopener">Prompt&nbsp;Generator</a></li>
+      <li><a href="#" data-prompt="open">Prompt&nbsp;Generator</a></li>
       <li><a href="#social">Social</a></li>
     </ul>
   </nav>
@@ -170,7 +170,7 @@ World Wide Love—sending it your way.</pre>
     </div>
   </div>
 
-  <a href="https://montana-092.github.io/prompt-generator/" target="_blank" rel="noopener" class="cta-button">
+  <a href="#" data-prompt="open" class="cta-button">
     Prompt Generatorを起動
   </a>
 </section>
@@ -187,6 +187,14 @@ World Wide Love—sending it your way.</pre>
   <footer>
     <p>&copy; 2025 DJ Montana. All rights reserved.</p>
   </footer>
+
+  <!-- Prompt Generator modal -->
+  <div id="prompt-modal" class="prompt-modal" style="display:none;">
+    <div class="prompt-content">
+      <span class="prompt-close">✕</span>
+      <iframe src="https://montana-092.github.io/prompt-generator/" title="Prompt Generator" loading="lazy"></iframe>
+    </div>
+  </div>
 
   <script>
     function revealSections() {
@@ -298,6 +306,18 @@ World Wide Love—sending it your way.</pre>
       isLyricsJapanese = !isLyricsJapanese;
     }
     document.getElementById('lyrics-toggle').addEventListener('click', toggleLyricsLang);
+  // Prompt Generator modal
+  const promptModal = document.getElementById('prompt-modal');
+  const promptClose = document.querySelector('.prompt-close');
+  document.querySelectorAll('[data-prompt="open"]').forEach(el=>{
+    el.addEventListener('click', e=>{
+      e.preventDefault();
+      promptModal.style.display = 'flex';
+    });
+  });
+  promptClose.addEventListener('click', ()=>{promptModal.style.display='none';});
+  window.addEventListener('keydown', e=>{ if(e.key==='Escape') promptModal.style.display='none';});
+  
   // Hamburger menu toggle
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('nav-links');
